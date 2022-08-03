@@ -1,0 +1,32 @@
+.page-container {
+  font-family: Arial, Helvetica, sans-serif;
+  font-size:x-large;
+  margin: 0 auto;
+  width: 60%;
+}
+
+.page-container input {
+  font-size: x-large;
+}
+
+.page-container h1 {
+  color: green;
+}
+
+.button-container {
+  text-align: center;
+}
+
+.btn {
+  background-color: green;
+  border-radius: 12px;
+  color:white;
+  font-size: x-large;
+  height: 50px;
+  margin-top: 20px;
+  width: 150px;
+}
+
+#play-again {
+  display: none;
+}
