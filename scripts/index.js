@@ -1,27 +1,21 @@
-// Main code
-
-// Find the needed elements
+// Find the elements
+// Set up event listners
 const guessButton = document.getElementById('guess-button');
-const guessInput = document.getElementById('guess-input');
-const feedbackContainer = document.getElementById('feedback');
-const playAgainContainer = document.getElementById('play-again');
-const playAgainButton = document.getElementById('again-button');
-
-// Listen for button clicks
 guessButton.addEventListener('click', processGuess);
+
+const guessInput = document.getElementById('guess-input');
+
+const feedbackContainer = document.getElementById('feedback');
+const playAgainContainer = document.getElementById('again-container');
+
+const playAgainButton = document.getElementById('again-button');
 playAgainButton.addEventListener('click', startGame);
 
 // Start the game
-let randomNumber = 0;
+let randomNumber;
 startGame();
 
 // Supporting functions
-function displayFeedback(feedbackText) {
-  if (feedbackContainer) {
-    feedbackContainer.innerHTML += '<br>' + feedbackText;
-  }
-}
-
 function displayPlayAgain(display) {
   if (playAgainContainer) {
     if (display) {
@@ -33,27 +27,26 @@ function displayPlayAgain(display) {
 }
 
 function generateRandomNumber(max) {
-  const result = Math.floor(Math.random() * max);
+  const result = Math.floor(Math.random() * max) + 1;
   return result;
 }
 
 function processGuess() {
-  let guess = '';
-  let feedback = '';
-
+  let feedbackText;
   if (guessInput) {
-    guess = guessInput.value;
+    const guess = guessInput.valueAsNumber;
 
-    if (+guess === randomNumber) {
-      feedback = `${guess} is correct ... You win!`;
+    if (guess === randomNumber) {
+      feedbackText = `${guess} is correct ... You win!`;
       displayPlayAgain(true);
     } else if (guess > randomNumber) {
-      feedback = `${guess} is too high`;
+      feedbackText = `${guess} is   too   high`;
     } else {
-      feedback = `${guess} is too low`;
+      feedbackText = `${guess} is too low`;
     }
-
-    displayFeedback(feedback);
+  }
+  if (feedbackContainer) {
+    feedbackContainer.innerHTML += '<br>' + feedbackText;
   }
 }
 
@@ -61,7 +54,7 @@ function startGame() {
   // Hide the play again button
   displayPlayAgain(false);
 
-  // Clear the log
+  // Clear the feedback
   if (feedbackContainer) {
     feedbackContainer.innerHTML = '';
   }
